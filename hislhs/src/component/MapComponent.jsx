@@ -91,7 +91,7 @@ const MapComponent = () => {
   const [isDrawMode, setIsDrawMode] = useState(false);
   const [searchedLocation, setSearchedLocation] = useState(null);
   const mapRef = useRef(null);
-  const defaultCenter = [40.7128, -74.0060];
+  const defaultCenter = [23.8103, 90.4125];
   const defaultZoom = 13;
   const provider = new OpenStreetMapProvider();
 
