@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Rectangle, useMapEvents, Marker, Popup, useMap
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import L from 'leaflet';
 import Navbar from './Navbar';
+import InfoContainer from './InfoContainer';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -12,7 +13,6 @@ L.Icon.Default.mergeOptions({
 });
 function MapController({ center, zoom }) {
   const map = useMap();
-  
   useEffect(() => {
     if (center) {
       map.flyTo(center, zoom || map.getZoom(), {
@@ -23,17 +23,31 @@ function MapController({ center, zoom }) {
 
   return null;
 }
-
 function DrawRectangle({ onRegionSelect, isEnabled }) {
   const [startPoint, setStartPoint] = useState(null);
   const [currentPoint, setCurrentPoint] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const map = useMap();
+  
   useEffect(() => {
     if (isEnabled) {
       map.getContainer().style.cursor = 'crosshair';
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.boxZoom.disable();
+      map.keyboard.disable();
+      if (map.tap) map.tap.disable();
     } else {
       map.getContainer().style.cursor = '';
+      map.dragging.enable();
+      map.touchZoom.enable();
+      map.doubleClickZoom.enable();
+      map.scrollWheelZoom.enable();
+      map.boxZoom.enable();
+      map.keyboard.enable();
+      if (map.tap) map.tap.enable();
       setIsDrawing(false);
       setStartPoint(null);
       setCurrentPoint(null);
@@ -64,6 +78,7 @@ function DrawRectangle({ onRegionSelect, isEnabled }) {
       }
     },
   });
+  
   if (isDrawing && startPoint && currentPoint && isEnabled) {
     return <Rectangle bounds={[startPoint, currentPoint]} pathOptions={{ color: 'blue', fillOpacity: 0.2 }} />;
   }
@@ -179,8 +194,6 @@ const MapComponent = () => {
             pathOptions={{ color: 'red', fillOpacity: 0.3, weight: 2 }} 
           />
         )}
-
-        {/* Show center marker of selected region */}
         {regionInfo && (
           <Marker position={regionInfo.center}>
             <Popup>
@@ -192,8 +205,6 @@ const MapComponent = () => {
             </Popup>
           </Marker>
         )}
-
-        {/* Show searched location marker */}
         {searchedLocation && (
           <Marker position={searchedLocation.center}>
             <Popup>
@@ -204,25 +215,7 @@ const MapComponent = () => {
           </Marker>
         )}
       </MapContainer>
-      {regionInfo && (
-        <div className="absolute top-24 sm:top-28 right-4 bg-white p-4 rounded-lg shadow-lg z-[1000] max-w-sm">
-          <div className="bg-blue-50 p-3 rounded">
-            <h3 className="font-semibold mb-2 text-blue-900">📍 Selected Region</h3>
-            <div className="space-y-2 text-xs text-blue-800">
-              <div>
-                <strong>Center:</strong><br />
-                Lat: {regionInfo.center[0].toFixed(6)}<br />
-                Lng: {regionInfo.center[1].toFixed(6)}
-              </div>
-              <div>
-                <strong>Area Coverage:</strong><br />
-                Latitude: {regionInfo.latDiff}°<br />
-                Longitude: {regionInfo.lngDiff}°
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <InfoContainer regionInfo={regionInfo} onClose={clearSelection} />
     </div>
   );
 };

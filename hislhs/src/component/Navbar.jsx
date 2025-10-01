@@ -59,7 +59,7 @@ const Navbar = ({
           </div>
         </form>
       </div>
-      <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-2">
+      <div className="fixed top-1/2 -translate-y-1/2 right-4 z-[9999] flex flex-col gap-2 items-center">
         <div className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] overflow-hidden">
           <button
             onClick={onZoomIn}
@@ -96,17 +96,17 @@ const Navbar = ({
         </button>
       </div>
       {isDrawMode && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-md">
-          <div className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 bg-blue-600 rounded-full animate-pulse"></div>
-              <p className="text-sm text-gray-800 font-medium">
-                Click and drag to select area
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-lg px-4">
+          <div className="bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.15)] flex items-center justify-between" style={{ height: '48px', paddingLeft: '32px', paddingRight: '32px', gap: '24px' }}>
+            <div className="flex items-center flex-1" style={{ gap: '16px' }}>
+              <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse flex-shrink-0"></div>
+              <p className="text-[15px] text-gray-800 font-normal">
+                Click and drag to select an area
               </p>
             </div>
             <button
               onClick={onToggleDrawMode}
-              className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
+              className="text-[15px] text-blue-600 hover:text-blue-700 font-medium transition-colors flex-shrink-0"
             >
               Cancel
             </button>
