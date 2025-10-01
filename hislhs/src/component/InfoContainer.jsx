@@ -139,8 +139,8 @@ function InfoContainer({ regionInfo, onClose }) {
             className="fixed bottom-0 left-1/2 -translate-x-1/2 z-[9999] w-full pointer-events-none" 
             style={{ 
                 maxWidth: '1400px',
-                paddingLeft: '16px', 
-                paddingRight: '16px'
+                paddingLeft: 'clamp(8px, 2vw, 16px)', 
+                paddingRight: 'clamp(8px, 2vw, 16px)'
             }}
         >
             <div className="pointer-events-auto">
@@ -155,10 +155,10 @@ function InfoContainer({ regionInfo, onClose }) {
                     <div 
                         className="flex items-center justify-between" 
                         style={{ 
-                            paddingLeft: '24px', 
-                            paddingRight: '20px', 
-                            paddingTop: '20px', 
-                            paddingBottom: '20px',
+                            paddingLeft: 'clamp(16px, 3vw, 24px)', 
+                            paddingRight: 'clamp(12px, 3vw, 20px)', 
+                            paddingTop: 'clamp(16px, 3vw, 20px)', 
+                            paddingBottom: 'clamp(16px, 3vw, 20px)',
                             borderBottom: '1px solid #e5e7eb'
                         }}
                     >
@@ -166,10 +166,10 @@ function InfoContainer({ regionInfo, onClose }) {
                             <h3 
                                 className="font-medium text-gray-900" 
                                 style={{ 
-                                    fontSize: '18px',
-                                    lineHeight: '24px',
+                                    fontSize: 'clamp(16px, 3vw, 18px)',
+                                    lineHeight: '1.3',
                                     letterSpacing: '-0.01em',
-                                    marginBottom: '6px'
+                                    marginBottom: 'clamp(4px, 1vw, 6px)'
                                 }}
                             >
                                 Urban Planning Analysis
@@ -177,8 +177,8 @@ function InfoContainer({ regionInfo, onClose }) {
                             <p 
                                 className="text-gray-600" 
                                 style={{ 
-                                    fontSize: '13px',
-                                    lineHeight: '18px',
+                                    fontSize: 'clamp(11px, 2.5vw, 13px)',
+                                    lineHeight: '1.4',
                                     letterSpacing: '0'
                                 }}
                             >
@@ -219,7 +219,7 @@ function InfoContainer({ regionInfo, onClose }) {
                         </div>
                     </div>
                     {isExpanded && (
-                        <div style={{ padding: '24px' }}>
+                        <div style={{ padding: 'clamp(16px, 3vw, 24px)' }}>
                             {loading ? (
                                 <div 
                                     className="flex items-center justify-center" 
@@ -241,12 +241,12 @@ function InfoContainer({ regionInfo, onClose }) {
                                     <div 
                                         className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl" 
                                         style={{ 
-                                            padding: '20px 24px',
-                                            marginBottom: '24px',
+                                            padding: 'clamp(16px, 3vw, 20px) clamp(16px, 3vw, 24px)',
+                                            marginBottom: 'clamp(16px, 3vw, 24px)',
                                             border: '1px solid #dbeafe'
                                         }}
                                     >
-                                        <div className="flex items-center justify-between">
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between" style={{ gap: 'clamp(12px, 2vw, 0px)' }}>
                                             <div>
                                                 <p 
                                                     className="font-medium text-gray-700" 
@@ -261,16 +261,16 @@ function InfoContainer({ regionInfo, onClose }) {
                                                     Based on facility density and urban planning standards
                                                 </p>
                                             </div>
-                                            <div className="flex items-center" style={{ gap: '12px' }}>
+                                            <div className="flex items-center" style={{ gap: 'clamp(8px, 2vw, 12px)' }}>
                                                 <div 
                                                     className={`font-bold ${calculateInfraScore() >= 70 ? 'text-green-600' : calculateInfraScore() >= 40 ? 'text-orange-600' : 'text-red-600'}`}
-                                                    style={{ fontSize: '36px', lineHeight: '36px', letterSpacing: '-0.02em' }}
+                                                    style={{ fontSize: 'clamp(28px, 6vw, 36px)', lineHeight: '1', letterSpacing: '-0.02em' }}
                                                 >
                                                     {calculateInfraScore()}
                                                 </div>
                                                 <div 
                                                     className="text-gray-500 font-medium" 
-                                                    style={{ fontSize: '16px', marginTop: '8px' }}
+                                                    style={{ fontSize: 'clamp(14px, 3vw, 16px)', marginTop: 'clamp(4px, 1vw, 8px)' }}
                                                 >
                                                     /100
                                                 </div>
@@ -289,12 +289,12 @@ function InfoContainer({ regionInfo, onClose }) {
                                             Essential Facilities
                                         </h4>
                                         <div 
-                                            className="grid grid-cols-2 sm:grid-cols-5" 
-                                            style={{ gap: '12px' }}
+                                            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5" 
+                                            style={{ gap: 'clamp(8px, 2vw, 12px)' }}
                                         >
                                             <div 
                                                 className="bg-white rounded-xl border-2 border-blue-100 hover:border-blue-300 hover:shadow-sm transition-all duration-200"
-                                                style={{ padding: '16px' }}
+                                                style={{ padding: 'clamp(12px, 2.5vw, 16px)' }}
                                             >
                                                 <div 
                                                     className="flex items-center" 
@@ -315,7 +315,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                 </div>
                                                 <p 
                                                     className="font-bold text-gray-900" 
-                                                    style={{ fontSize: '28px', lineHeight: '32px', marginBottom: '4px' }}
+                                                    style={{ fontSize: 'clamp(24px, 5vw, 28px)', lineHeight: '1.15', marginBottom: 'clamp(2px, 1vw, 4px)' }}
                                                 >
                                                     {amenities.hospitals}
                                                 </p>
@@ -500,12 +500,12 @@ function InfoContainer({ regionInfo, onClose }) {
                                                 Estimated using <strong>2,500 people/km²</strong> urban density with <strong>2.5% annual growth</strong> (UN methodology)
                                             </p>
                                             <div 
-                                                className="grid grid-cols-1 sm:grid-cols-3" 
-                                                style={{ gap: '12px' }}
+                                                className="grid grid-cols-1 md:grid-cols-3" 
+                                                style={{ gap: 'clamp(10px, 2vw, 12px)' }}
                                             >
                                                 <div 
                                                     className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border border-blue-200"
-                                                    style={{ padding: '20px' }}
+                                                    style={{ padding: 'clamp(16px, 3vw, 20px)' }}
                                                 >
                                                     <div 
                                                         className="flex items-center" 
@@ -521,7 +521,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                     </div>
                                                     <p 
                                                         className="font-bold text-blue-900" 
-                                                        style={{ fontSize: '32px', lineHeight: '36px', marginBottom: '6px' }}
+                                                        style={{ fontSize: 'clamp(26px, 5vw, 32px)', lineHeight: '1.15', marginBottom: 'clamp(4px, 1vw, 6px)' }}
                                                     >
                                                         {populationData.current.toLocaleString()}
                                                     </p>
@@ -534,7 +534,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                 </div>
                                                 <div 
                                                     className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl border border-purple-200"
-                                                    style={{ padding: '20px' }}
+                                                    style={{ padding: 'clamp(16px, 3vw, 20px)' }}
                                                 >
                                                     <div 
                                                         className="flex items-center" 
@@ -550,7 +550,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                     </div>
                                                     <p 
                                                         className="font-bold text-purple-900" 
-                                                        style={{ fontSize: '32px', lineHeight: '36px', marginBottom: '6px' }}
+                                                        style={{ fontSize: 'clamp(26px, 5vw, 32px)', lineHeight: '1.15', marginBottom: 'clamp(4px, 1vw, 6px)' }}
                                                     >
                                                         {populationData.projected5Year.toLocaleString()}
                                                     </p>
@@ -563,7 +563,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                 </div>
                                                 <div 
                                                     className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl border border-orange-200"
-                                                    style={{ padding: '20px' }}
+                                                    style={{ padding: 'clamp(16px, 3vw, 20px)' }}
                                                 >
                                                     <div 
                                                         className="flex items-center" 
@@ -579,7 +579,7 @@ function InfoContainer({ regionInfo, onClose }) {
                                                     </div>
                                                     <p 
                                                         className="font-bold text-orange-900" 
-                                                        style={{ fontSize: '32px', lineHeight: '36px', marginBottom: '6px' }}
+                                                        style={{ fontSize: 'clamp(26px, 5vw, 32px)', lineHeight: '1.15', marginBottom: 'clamp(4px, 1vw, 6px)' }}
                                                     >
                                                         {populationData.projected10Year.toLocaleString()}
                                                     </p>

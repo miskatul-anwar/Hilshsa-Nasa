@@ -22,7 +22,7 @@ const Navbar = ({
 
   return (
     <>
-      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-2xl">
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] w-[95%] sm:w-[90%] max-w-2xl px-2 sm:px-0">
         <form onSubmit={handleSearch}>
           <div className="relative">
             <input
@@ -32,6 +32,7 @@ const Navbar = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search Planned Cities"
               className="w-full h-12 pl-5 pr-20 bg-white text-gray-900 placeholder:text-gray-500 rounded-full focus:outline-none transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)] focus:shadow-[0_4px_12px_rgba(0,0,0,0.25)] text-[15px] indent-5 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
+              style={{ fontSize: 'clamp(13px, 3vw, 15px)' }}
               disabled={isSearching}
             />
             {searchQuery && !isSearching && (
@@ -59,18 +60,18 @@ const Navbar = ({
           </div>
         </form>
       </div>
-      <div className="fixed top-1/2 -translate-y-1/2 right-4 z-[9999] flex flex-col gap-2 items-center">
+      <div className="fixed top-1/2 -translate-y-1/2 right-2 sm:right-4 z-[9999] flex flex-col gap-2 items-center">
         <div className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] overflow-hidden">
           <button
             onClick={onZoomIn}
-            className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-200"
+            className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors border-b border-gray-200"
             title="Zoom in"
           >
             <ZoomIn size={20} />
           </button>
           <button
             onClick={onZoomOut}
-            className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
+            className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
             title="Zoom out"
           >
             <ZoomOut size={20} />
@@ -78,7 +79,7 @@ const Navbar = ({
         </div>
         <button
           onClick={onToggleDrawMode}
-          className={`w-10 h-10 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-200 ${
+          className={`w-10 h-10 sm:w-11 sm:h-11 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-200 ${
             isDrawMode
               ? 'bg-blue-600 text-white shadow-[0_4px_12px_rgba(59,130,246,0.4)]'
               : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -89,15 +90,15 @@ const Navbar = ({
         </button>
         <button
           onClick={onClearSelection}
-          className="w-10 h-10 bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
+          className="w-10 h-10 sm:w-11 sm:h-11 bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
           title="Clear Selection"
         >
           <X size={20} />
         </button>
       </div>
       {isDrawMode && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-lg px-4">
-          <div className="bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.15)] flex items-center justify-between" style={{ height: '48px', paddingLeft: '32px', paddingRight: '32px', gap: '24px' }}>
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] w-[90%] sm:w-full max-w-lg px-2 sm:px-4">
+          <div className="bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.15)] flex items-center justify-between" style={{ height: 'clamp(40px, 8vw, 48px)', paddingLeft: 'clamp(20px, 4vw, 32px)', paddingRight: 'clamp(20px, 4vw, 32px)', gap: 'clamp(16px, 3vw, 24px)' }}>
             <div className="flex items-center flex-1" style={{ gap: '16px' }}>
               <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse flex-shrink-0"></div>
               <p className="text-[15px] text-gray-800 font-normal">
