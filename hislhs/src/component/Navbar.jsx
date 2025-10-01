@@ -11,7 +11,6 @@ const Navbar = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -23,7 +22,6 @@ const Navbar = ({
 
   return (
     <>
-      {/* Google Maps Style - Floating Search Bar */}
       <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-2xl">
         <form onSubmit={handleSearch}>
           <div className="relative">
@@ -36,7 +34,6 @@ const Navbar = ({
               className="w-full h-12 pl-5 pr-20 bg-white text-gray-900 placeholder:text-gray-500 rounded-full focus:outline-none transition-all duration-200 shadow-[0_2px_8px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)] focus:shadow-[0_4px_12px_rgba(0,0,0,0.25)] text-[15px] indent-5 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
               disabled={isSearching}
             />
-            {/* Clear Button */}
             {searchQuery && !isSearching && (
               <button
                 type="button"
@@ -46,7 +43,6 @@ const Navbar = ({
                 <X className="h-5 w-5" strokeWidth={2} />
               </button>
             )}
-            {/* Search Button or Loading Spinner */}
             {isSearching ? (
               <div className="absolute top-1/2 -translate-y-1/2 right-4 flex items-center">
                 <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
@@ -63,10 +59,7 @@ const Navbar = ({
           </div>
         </form>
       </div>
-
-      {/* Google Maps Style - Control Buttons (Right Side) */}
       <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-2">
-        {/* Zoom Controls */}
         <div className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] overflow-hidden">
           <button
             onClick={onZoomIn}
@@ -83,8 +76,6 @@ const Navbar = ({
             <ZoomOut size={20} />
           </button>
         </div>
-
-        {/* Draw Rectangle Toggle */}
         <button
           onClick={onToggleDrawMode}
           className={`w-10 h-10 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-200 ${
@@ -96,8 +87,6 @@ const Navbar = ({
         >
           <Square size={20} />
         </button>
-
-        {/* Clear Selection */}
         <button
           onClick={onClearSelection}
           className="w-10 h-10 bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors"
@@ -106,8 +95,6 @@ const Navbar = ({
           <X size={20} />
         </button>
       </div>
-
-      {/* Draw Mode Indicator - Google Maps Style */}
       {isDrawMode && (
         <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-md">
           <div className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.15)] px-6 py-3 flex items-center justify-between">

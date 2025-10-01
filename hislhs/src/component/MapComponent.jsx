@@ -10,8 +10,6 @@ L.Icon.Default.mergeOptions({
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
-
-// Component to handle map zoom from navbar
 function MapController({ center, zoom }) {
   const map = useMap();
   
@@ -26,13 +24,11 @@ function MapController({ center, zoom }) {
   return null;
 }
 
-// Component to handle rectangle drawing (only when enabled)
 function DrawRectangle({ onRegionSelect, isEnabled }) {
   const [startPoint, setStartPoint] = useState(null);
   const [currentPoint, setCurrentPoint] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const map = useMap();
-
   useEffect(() => {
     if (isEnabled) {
       map.getContainer().style.cursor = 'crosshair';
@@ -68,11 +64,9 @@ function DrawRectangle({ onRegionSelect, isEnabled }) {
       }
     },
   });
-
   if (isDrawing && startPoint && currentPoint && isEnabled) {
     return <Rectangle bounds={[startPoint, currentPoint]} pathOptions={{ color: 'blue', fillOpacity: 0.2 }} />;
   }
-
   return null;
 }
 
@@ -82,13 +76,10 @@ const MapComponent = () => {
   const [isDrawMode, setIsDrawMode] = useState(false);
   const [searchedLocation, setSearchedLocation] = useState(null);
   const mapRef = useRef(null);
-
   const defaultCenter = [40.7128, -74.0060];
   const defaultZoom = 13;
-
   const provider = new OpenStreetMapProvider();
 
-  // Handle city/location search
   const handleSearch = async (query) => {
     try {
       const results = await provider.search({ query });
@@ -107,15 +98,12 @@ const MapComponent = () => {
       alert('Failed to search location. Please try again.');
     }
   };
-
-  // Handle zoom controls
   const handleZoomIn = () => {
     if (mapRef.current) {
       const map = mapRef.current;
       map.setZoom(map.getZoom() + 1);
     }
   };
-
   const handleZoomOut = () => {
     if (mapRef.current) {
       const map = mapRef.current;
@@ -123,14 +111,12 @@ const MapComponent = () => {
     }
   };
 
-  // Toggle draw mode
   const toggleDrawMode = () => {
     setIsDrawMode(!isDrawMode);
   };
 
   const handleRegionSelect = (bounds) => {
     setSelectedRegion(bounds);
-    
     const [[lat1, lng1], [lat2, lng2]] = bounds;
     const centerLat = (lat1 + lat2) / 2;
     const centerLng = (lng1 + lng2) / 2;
@@ -143,13 +129,10 @@ const MapComponent = () => {
       latDiff: latDiff.toFixed(6),
       lngDiff: lngDiff.toFixed(6),
     });
-
     console.log('Selected Region:', {
       bounds,
       center: [centerLat, centerLng],
     });
-    
-    // Auto-disable draw mode after selection
     setIsDrawMode(false);
   };
 
@@ -160,7 +143,6 @@ const MapComponent = () => {
 
   return (
     <div className="w-full h-screen relative">
-      {/* Navbar */}
       <Navbar
         onSearch={handleSearch}
         onZoomIn={handleZoomIn}
@@ -169,8 +151,6 @@ const MapComponent = () => {
         isDrawMode={isDrawMode}
         onClearSelection={clearSelection}
       />
-
-      {/* Map Container - Full screen */}
       <MapContainer
         center={defaultCenter}
         zoom={defaultZoom}
@@ -182,8 +162,6 @@ const MapComponent = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        {/* Map Controller for search results */}
         {searchedLocation && (
           <MapController 
             center={searchedLocation.center} 
@@ -191,13 +169,10 @@ const MapComponent = () => {
           />
         )}
 
-        {/* Draw Rectangle Component */}
         <DrawRectangle 
           onRegionSelect={handleRegionSelect} 
           isEnabled={isDrawMode}
         />
-
-        {/* Show selected region */}
         {selectedRegion && (
           <Rectangle 
             bounds={selectedRegion} 
@@ -229,8 +204,6 @@ const MapComponent = () => {
           </Marker>
         )}
       </MapContainer>
-
-      {/* Info Panel - Right Side */}
       {regionInfo && (
         <div className="absolute top-24 sm:top-28 right-4 bg-white p-4 rounded-lg shadow-lg z-[1000] max-w-sm">
           <div className="bg-blue-50 p-3 rounded">
